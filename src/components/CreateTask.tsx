@@ -1,10 +1,14 @@
 export default function CreateTask() {
 	return (
-		<form className="create-task-form task-form">
-			<button type="button" className="checkbox">
-				<img></img>
+		<form className="create-task-form box">
+			<button type="button" className="checkbox create-task-checkbox">
+				<img src="/src/assets/images/icon-check.svg" alt="Check" />
 			</button>
-			<input type="text" placeholder="Create a new todo..." />
+			<input
+				className="create-task-input"
+				type="text"
+				placeholder="Create a new todo..."
+			/>
 		</form>
 	);
 }

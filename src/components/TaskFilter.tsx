@@ -1,6 +1,6 @@
 export default function TaskFilter() {
 	return (
-		<div className="task-filter">
+		<div className="task-filter box">
 			<button type="button" className="filter">
 				All
 			</button>
