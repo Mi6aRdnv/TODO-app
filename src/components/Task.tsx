@@ -1,15 +1,18 @@
 import { useState } from "react";
 
-export default function CreateTask() {
-	const [taskStatus, setTaskStatus] = useState<"active" | "completed">(
-		"active",
-	);
+export default function Task({
+	text,
+	status,
+}: {
+	text: string;
+	status: "active" | "completed";
+}) {
+	const [taskStatus, setTaskStatus] = useState<"active" | "completed">(status);
 	function toggleTaskStatus() {
 		setTaskStatus(taskStatus === "active" ? "completed" : "active");
 	}
-
 	return (
-		<form className="create-task-form box">
+		<li className="box">
 			<button
 				type="button"
 				className={
@@ -23,16 +26,18 @@ export default function CreateTask() {
 					<img src="/src/assets/images/icon-check.svg" alt="Check" />
 				)}
 			</button>
-			<input
+			<p
 				className={
 					taskStatus === "completed"
 						? "task-text--completed create-task-input"
 						: "create-task-input"
 				}
-				type="text"
-				placeholder="Create a new todo..."
-				autoFocus
-			/>
-		</form>
+			>
+				{text}
+			</p>
+			<button type="button" className="delete-task-button">
+				<img src="/src/assets/images/icon-cross.svg" alt="Delete task" />
+			</button>
+		</li>
 	);
 }

@@ -56,6 +56,7 @@
 	margin-right: 15px;
 	background: transparent;
 	border-radius: 50%;
+	user-select: none;
 }
 .create-task-input {
 	width: 100%;
@@ -66,7 +67,7 @@
 	font-size: 18px;
 }
 
-.create-task-checkbox {
+.checkbox--completed {
 	background: var(--check-bg);
 }
 .checkbox img {
@@ -91,6 +92,10 @@
 .task-text {
 	padding-right: 5px;
 	transition: 0.8s;
+}
+.task-text--completed {
+	text-decoration: line-through;
+	color: var(--text-color-secondary);
 }
 .delete-task-button {
 	margin-left: auto;

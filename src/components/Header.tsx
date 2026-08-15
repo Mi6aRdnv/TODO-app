@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 export default function Header() {
-	const [theme, setTheme] = useState("night");
+	const [theme, setTheme] = useState<"night" | "day">("night");
+	document.documentElement.setAttribute("data-theme", theme);
 	function toggleTheme() {
 		setTheme(theme === "night" ? "day" : "night");
 		document.documentElement.setAttribute("data-theme", theme);
