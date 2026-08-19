@@ -1,11 +1,29 @@
 import Task from "./Task";
+import type { TaskData, SetTasks } from "../App";
 
-export default function TaskList() {
+export default function TaskList({
+	tasks,
+	setTasks,
+}: {
+	tasks: TaskData[];
+	setTasks: SetTasks;
+}) {
+	const taskList = tasks.map((task) => {
+		return (
+			<Task
+				text={task.text}
+				status={task.status}
+				key={tasks.indexOf(task)}
+				taskIndex={tasks.indexOf(task)}
+				setTasks={setTasks}
+			/>
+		);
+	});
+
 	return (
 		<>
 			<ul className="task-list">
-				<Task text="Finish homework" status="completed" />
-				<Task text="Read a book" status="active" />
+				{taskList}
 
 				<li className="box task-list-footer">
 					<p className="task-count">2 items left</p>

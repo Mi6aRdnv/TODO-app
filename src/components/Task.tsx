@@ -1,34 +1,43 @@
-import { useState } from "react";
+import type { Status, TaskData, SetTasks } from "../App";
 
 export default function Task({
 	text,
 	status,
+	taskIndex,
+	setTasks,
 }: {
 	text: string;
-	status: "active" | "completed";
+	status: Status;
+	taskIndex: number;
+	setTasks: SetTasks;
 }) {
-	const [taskStatus, setTaskStatus] = useState<"active" | "completed">(status);
 	function toggleTaskStatus() {
-		setTaskStatus(taskStatus === "active" ? "completed" : "active");
+		const newStatus = status === "active" ? "completed" : "active";
+		const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+		const newTasks = tasks.map((task: TaskData, index: number) =>
+			index === taskIndex ? { ...task, status: newStatus } : task,
+		);
+
+		localStorage.setItem("tasks", JSON.stringify(newTasks));
+		setTasks(newTasks);
 	}
+
 	return (
 		<li className="box">
 			<button
 				type="button"
 				className={
-					taskStatus === "completed"
-						? "checkbox--completed checkbox"
-						: "checkbox"
+					status === "completed" ? "checkbox--completed checkbox" : "checkbox"
 				}
 				onClick={toggleTaskStatus}
 			>
-				{taskStatus === "completed" && (
+				{status === "completed" && (
 					<img src="/src/assets/images/icon-check.svg" alt="Check" />
 				)}
 			</button>
 			<p
 				className={
-					taskStatus === "completed"
+					status === "completed"
 						? "task-text--completed create-task-input"
 						: "create-task-input"
 				}
