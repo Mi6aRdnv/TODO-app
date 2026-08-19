@@ -20,6 +20,12 @@ export default function TaskList({
 		);
 	});
 
+	function clearCompletedTask() {
+		const newTasks = tasks.filter((task) => task.status !== "completed");
+		localStorage.setItem("tasks", JSON.stringify(newTasks));
+		setTasks(newTasks);
+	}
+
 	return (
 		<>
 			<ul className="task-list">
@@ -27,7 +33,11 @@ export default function TaskList({
 
 				<li className="box task-list-footer">
 					<p className="task-count">2 items left</p>
-					<button type="button" className="clear-completed-button">
+					<button
+						onClick={clearCompletedTask}
+						type="button"
+						className="clear-completed-button"
+					>
 						Clear Completed
 					</button>
 				</li>

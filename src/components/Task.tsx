@@ -21,6 +21,15 @@ export default function Task({
 		localStorage.setItem("tasks", JSON.stringify(newTasks));
 		setTasks(newTasks);
 	}
+	function deleteTask() {
+		const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+		const newTasks = tasks.filter(
+			(_task: TaskData, index: number) => index !== taskIndex,
+		);
+
+		localStorage.setItem("tasks", JSON.stringify(newTasks));
+		setTasks(newTasks);
+	}
 
 	return (
 		<li className="box">
@@ -44,7 +53,7 @@ export default function Task({
 			>
 				{text}
 			</p>
-			<button type="button" className="delete-task-button">
+			<button onClick={deleteTask} type="button" className="delete-task-button">
 				<img src="/src/assets/images/icon-cross.svg" alt="Delete task" />
 			</button>
 		</li>
