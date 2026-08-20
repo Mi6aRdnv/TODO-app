@@ -12,6 +12,7 @@ export default function CreateTask({
 		"active",
 	);
 	const inputTextRef = useRef<HTMLInputElement>(null);
+
 	function toggleTaskStatus() {
 		setTaskStatus(taskStatus === "active" ? "completed" : "active");
 	}
@@ -26,9 +27,9 @@ export default function CreateTask({
 			...tasks,
 			{ text: inputTextRef.current.value, status: taskStatus },
 		];
-		localStorage.setItem("tasks", JSON.stringify(newTasks));
-		// }
 		inputTextRef.current.value = "";
+
+		localStorage.setItem("tasks", JSON.stringify(newTasks));
 		setTasks(newTasks);
 	}
 

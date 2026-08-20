@@ -1,5 +1,6 @@
 import Task from "./Task";
 import type { TaskData, SetTasks } from "../App";
+import { useState } from "react";
 
 export default function TaskList({
 	tasks,
@@ -8,6 +9,8 @@ export default function TaskList({
 	tasks: TaskData[];
 	setTasks: SetTasks;
 }) {
+	const [draggedIndex, setDraggedIndex] = useState<null | number>(null);
+
 	const taskList = tasks.map((task) => {
 		return (
 			<Task
@@ -16,6 +19,8 @@ export default function TaskList({
 				key={tasks.indexOf(task)}
 				taskIndex={tasks.indexOf(task)}
 				setTasks={setTasks}
+				draggedIndex={draggedIndex}
+				setDraggedIndex={setDraggedIndex}
 			/>
 		);
 	});
