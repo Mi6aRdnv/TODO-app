@@ -9,6 +9,11 @@ export default function TaskList({
 	tasks: TaskData[];
 	setTasks: SetTasks;
 }) {
+	const taskQuantity = tasks.reduce<number>(
+		(acc, task) => (task.status === "active" ? acc + 1 : acc),
+		0,
+	);
+
 	const [draggedIndex, setDraggedIndex] = useState<null | number>(null);
 
 	const taskList = tasks.map((task) => {
@@ -37,7 +42,7 @@ export default function TaskList({
 				{taskList}
 
 				<li className="box task-list-footer">
-					<p className="task-count">2 items left</p>
+					<p className="task-count">{taskQuantity} items left</p>
 					<button
 						onClick={clearCompletedTask}
 						type="button"
