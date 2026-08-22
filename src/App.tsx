@@ -20,13 +20,16 @@ function App() {
 	const [tasks, setTasks] = useState<TaskData[]>(
 		JSON.parse(localStorage.getItem("tasks") as string),
 	);
-
+	const [filterTaskBy, setFilterTaskBy] = useState<string>("all");
 	return (
 		<div className="container">
 			<Header />
 			<CreateTask tasks={tasks} setTasks={setTasks} />
-			<TaskList tasks={tasks} setTasks={setTasks} />
-			<TaskFilter />
+			<TaskList tasks={tasks} setTasks={setTasks} filterTaskBy={filterTaskBy} />
+			<TaskFilter
+				filterTaskBy={filterTaskBy}
+				setFilterTaskBy={setFilterTaskBy}
+			/>
 			<p className="drag-instructions">Drag and drop to reorder list</p>
 		</div>
 	);

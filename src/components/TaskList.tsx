@@ -5,9 +5,11 @@ import { useState } from "react";
 export default function TaskList({
 	tasks,
 	setTasks,
+	filterTaskBy,
 }: {
 	tasks: TaskData[];
 	setTasks: SetTasks;
+	filterTaskBy: string;
 }) {
 	const taskQuantity = tasks.reduce<number>(
 		(acc, task) => (task.status === "active" ? acc + 1 : acc),
@@ -16,7 +18,16 @@ export default function TaskList({
 
 	const [draggedIndex, setDraggedIndex] = useState<null | number>(null);
 
-	const taskList = tasks.map((task) => {
+	let filteredTasks;
+	if (filterTaskBy !== "all") {
+		filteredTasks =
+			filterTaskBy === "active"
+				? tasks.filter((task) => task.status === "active")
+				: tasks.filter((task) => task.status === "completed");
+	} else {
+		filteredTasks = tasks;
+	}
+	const taskList = filteredTasks.map((task) => {
 		return (
 			<Task
 				text={task.text}

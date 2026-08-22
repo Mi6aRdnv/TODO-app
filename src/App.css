@@ -130,6 +130,9 @@
 .filter:hover {
 	color: var(--text-hover-color);
 }
+.filter--chosen {
+	color: var(--text-hover-color);
+}
 
 .drag-instructions {
 	color: var(--purple-800);
